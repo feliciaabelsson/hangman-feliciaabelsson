@@ -1,12 +1,12 @@
 body {
     margin: 0 auto;
-    padding: 0;
+    width: 100%;
     text-align: center;
     background: rgba(226, 226, 226, 0.719);
 }
 
 .wrapper {
-    padding-top: 3rem;
+    padding: 3rem 0;
 }
 
 
@@ -19,3 +19,35 @@ figure img {
     max-width: 30%;
 }
 
+ul {
+    margin: 0;
+    padding: 2rem 0;
+}
+
+#buttons {
+    display: flex;
+    justify-content: center;
+}
+
+.alphabet {
+    list-style: none;
+    display: flex;
+    gap: .5rem;
+    justify-content: center;
+    flex-wrap: wrap;
+    max-width: 50rem;
+    cursor: pointer;
+}
+
+.letter:hover {
+    background: rgb(27, 27, 102);
+}
+
+.letter {
+    font-size: 1.5rem;
+    background: rgb(54, 54, 211);
+    min-width: 2rem;
+    padding: .5rem;
+    border-radius: 10%;
+    color: white;
+}

@@ -38,12 +38,19 @@ buttons = () => {
     letterButtons = document.getElementById('buttons');
     letters = document.createElement('ul');
 
+    //loops through array of letters in alphabet2
     for (let i = 0; i < alphabet2.length; i++) {
+        //adds new classname to ul list
         letters.className = 'alphabet';
+        //creates a new li list 
         letterList = document.createElement('li');
+        //adds new classname to li list
         letterList.className = 'letter';
+        //adds the li list to innerhtml to the index of alphabet2 array
         letterList.innerHTML = alphabet2[i];
+        //sets ul list to the child of id buttons in html
         letterButtons.appendChild(letters);
+        //sets li list as child to ul 
         letters.appendChild(letterList);
     }
 }

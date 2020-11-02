@@ -33,6 +33,7 @@ const alphabet2 = [ 'a','b','c','d','e','f','g','h','i','k','l','m','n','o','p',
 //skapa ul lista där bokstäverna som är rätt läggs in i (createElement)
 //i Html ska de tomma bokstäverna för ordet ersättas med bokstäver 
 
+//----Generate letters 
 //function for getting the letters from array 
 buttons = () => {
     letterButtons = document.getElementById('buttons');
@@ -59,9 +60,60 @@ buttons = () => {
 buttons();
 
 
+//----Eventlisteners
+//show lives
+Comment=function(){
+    showlives.innerHTML="you have"+ lives +"lives";
+    if (lives<1){
+        showlives.innerHTML="Game Over";
+    }
+    for(var i=0;i< storeguess.length;i++){
+        if(counter+space ===geusses.length){
+            showlives.innerHTML="You Win"
+        }
+    }
+}
+
+
+
 //---Randomizer 
 //function randomWord() = gå igenom lista med ord och ge ut ett random
 //loopa igenom alphabet.length för att kunna matcha 
+
+//function getting word randomizer
+randomWord = () => {
+    //gets words from array and randomize it 
+    chosenWord = words[Math.floor(Math.random() * words.length)];
+    //kör buttons
+    buttons();
+    console.log(chosenWord);
+}
+//kör randomWord
+randomWord();
+
+
+// create storeguess ul
+// result=function(){}
+
+//function word holder
+wordsList = () => {
+    wordHolder = document.getElementById('word-holder');
+    correct = document.createElement('ul');
+
+    for (let i = 0; i < words.length; i++) {
+        correct.className = 'my-word';
+        guess = document.createElement('li');
+        guess.className ='guess';
+        guess.innerHTML = "_";
+
+        storeguess.push(guess);
+        wordHolder.appendChild(correct);
+        correct.appendChild(guess);
+    }
+}
+
+wordsList();
+
 
 //----Generate letters 
 //Create a variable that creates span in html 

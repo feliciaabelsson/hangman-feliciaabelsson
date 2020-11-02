@@ -1,0 +1,21 @@
+body {
+    margin: 0 auto;
+    padding: 0;
+    text-align: center;
+    background: rgba(226, 226, 226, 0.719);
+}
+
+.wrapper {
+    padding-top: 3rem;
+}
+
+
+figure {
+    display: flex;
+    justify-content: center;
+}
+
+figure img {
+    max-width: 30%;
+}
+

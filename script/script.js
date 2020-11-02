@@ -1,4 +1,13 @@
 //----Variabler
+
+var categori;
+var word;
+var lives;
+var guess;
+var storeguess;
+var showlives=
+document.getElementById("mylives");
+var showClue= document.getElementById("clue");
 //let words = lista med ord
 //let alphabet = 'a','b','c';
 window.onload= function(){

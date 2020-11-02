@@ -1,4 +1,5 @@
 //----Variabler
+
 var categori;
 var word;
 var lives;
@@ -7,8 +8,12 @@ var storeguess;
 var showlives=
 document.getElementById("mylives");
 var showClue= document.getElementById("clue");
+
 //the words that will be randomized 
 let words = ['ord1','ord2','ord3','ord4'];
+
+//let words = lista med ord
+
 //let alphabet = 'a','b','c';
 //the letters that will act as buttons in html
 //let lettersContainer = document.querySelector('.letters');

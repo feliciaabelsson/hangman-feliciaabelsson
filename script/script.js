@@ -18,11 +18,34 @@ window.onload= function(){
     var alphabet=[ 'a','b','c','d','e','f','g','h','i','k','l','m','n','o','p','q','r','s','t','u','v','w','x','y','z']
 }
 
+const alphabet2 = [ 'a','b','c','d','e','f','g','h','i','k','l','m','n','o','p','q','r','s','t','u','v','w','x','y','z'];
+
+
+
 //----Functioner
 //function på vad som händer om en bokstav klickas på 
 //if/else sats vid klick på bokstav 
 //skapa ul lista där bokstäverna som är rätt läggs in i (createElement)
 //i Html ska de tomma bokstäverna för ordet ersättas med bokstäver 
+
+//function for getting the letters from array 
+buttons = () => {
+    letterButtons = document.getElementById('buttons');
+    letters = document.createElement('ul');
+
+    for (let i = 0; i < alphabet2.length; i++) {
+        letters.className = 'alphabet';
+        letterList = document.createElement('li');
+        letterList.className = 'letter';
+        letterList.innerHTML = alphabet2[i];
+        letterButtons.appendChild(letters);
+        letters.appendChild(letterList);
+    }
+}
+
+//kör funktionen buttons
+buttons();
+
 
 //---Randomizer 
 //function randomWord() = gå igenom lista med ord och ge ut ett random
@@ -34,6 +57,9 @@ window.onload= function(){
 //Append letter as child to span so they connects 
 //Add class on span (.className) so we can change in css 
 //Append span to the letters container in html 
+
+
+
 
 //----Eventlisteners
 //En eventlistener för knapptryck på bokstav som går in i funktion x 

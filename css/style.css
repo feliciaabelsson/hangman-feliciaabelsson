@@ -18,4 +18,65 @@ figure {
 figure img {
     max-width: 30%;
 }
-
+#alphabet {
+   
+    margin:15px auto;
+    padding:0;
+    max-width:900px;
+  }
+  
+  #alphabet li {
+    float:left;
+    margin: 0 10px 10px 0;
+    list-style:none;
+    width:35px;
+    height:30px;
+    padding-top:10px;
+    background:white;
+    color:hotpink;
+    cursor:pointer;
+  
+    border: solid 1px white;
+  }
+      li:hover{
+        background:green;
+        border: solid 1px white;
+        color:white;
+      }
+  
+  
+  #my-word {
+    margin: 0;
+    display: block;
+    padding: 0;
+    display:block;
+  }
+  
+#mylives{
+    font-size:1.6em;
+    text-align:center;
+    display:block;
+  }
+  
+button{
+   
+    background:hotpink;
+    color:white;
+    border: solid 1px white;
+    text-decoration:none;
+    cursor:pointer;
+    font-size:1.2em;
+    padding:18px 10px;
+    width:180px;
+    margin: 10px;
+    outline: none;
+}
+    
+      button:hover{
+    
+        background:purple;
+        border: solid 1px white;
+        color:white;
+      }
+  
+  

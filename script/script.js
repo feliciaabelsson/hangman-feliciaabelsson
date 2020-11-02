@@ -1,9 +1,20 @@
-//----Variables
+//----Variabler
+var categori;
+var word;
+var lives;
+var guess;
+var storeguess;
+var showlives=
+document.getElementById("mylives");
+var showClue= document.getElementById("clue");
 //the words that will be randomized 
 let words = ['ord1','ord2','ord3','ord4'];
-
+//let alphabet = 'a','b','c';
+window.onload= function(){
+    var alphabet=[ 'a','b','c','d','e','f','g','h','i','k','l','m','n','o','p','q','r','s','t','u','v','w','x','y','z']
+}
 //the letters that will act as buttons in html
-let lettersContainer = document.querySelector('.letters');
+//let lettersContainer = document.querySelector('.letters');
 
 //select letters container in html
 window.onload= function(){

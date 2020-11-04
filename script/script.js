@@ -1,251 +1,142 @@
 
-//select letters container in html
-window.onload= function(){
-    var alphabet=[ 'a','b','c','d','e','f','g','h','i','k','l','m','n','o','p','q','r','s','t','u','v','w','x','y','z']
+//letters
+const letters = "abcdefghijklmnopqrstuvwxyz";
+
+//get array from lettters
+let lettersArray = Array.from(letters);
+
+// select letters contatiner
+let lettersContainer=document.querySelector(".letters");
+
+// generate letters 
+lettersArray.forEach(letter =>{
+  //create span 
+  let span= document.createElement("span");
+
+  //create letter text node
+  let theLetter=document.createTextNode(letter);
+
+// append the letter to span
+  span.appendChild(theLetter);
+
+  //add class on span
+  span.className='letter-box';
+
+  //append span to the letters contatiner
+  lettersContainer.appendChild(span);
+});
+//object of word and categories
+const words={ Programming:["php","javascript","go","fortran","scala","r","mysql","python"],
+Movies:[ "prestige","coco","up","twinlight","waves","the hunt","bacurau"]
+,People:["Albert Einstein","Cleopatra","Mahatma Ghandi","Zlatan Ibrahimovic","Luka Mordic"],
+Countries:["Sweden", "Syria","Tanzania","Niger","Jamaica","Greece"]
 }
-//----Variabler
-var categori;
-var word;
-var lives;
-var guess;
-var storeguess;
-var showlives=
-document.getElementById("mylives");
-var showClue= document.getElementById("clue");
+//get random property
+let allKeys = Object.keys(words);
 
-//the words that will be randomized // Create an array of words
-var words = [
-    "javascript",
-    "monkey",
-    "amazing",
-    "pancake",
-    "galvainze",
-    "cohort",
-    "concatenate",
-    "iteration",
-    "index",
-    "code",
-    "angular",
-    "react",
-    "python"
-    ];
+//random number depend on keys length
+let randomPropNumber= Math.floor(Math.random() * allKeys.length);
 
-//let words = lista med ord
+//category
+let randomPropName = allKeys[randomPropNumber];
 
-//let alphabet = 'a','b','c';
-//the letters that will act as buttons in html
-//let lettersContainer = document.querySelector('.letters');
+//catrgory words 
+let randomPropValue = words[randomPropName];
 
 
-//----Functioner
-//function på vad som händer om en bokstav klickas på 
-//if/else sats vid klick på bokstav 
-//skapa ul lista där bokstäverna som är rätt läggs in i (createElement)
-//i Html ska de tomma bokstäverna för ordet ersättas med bokstäver 
+//random  number depend on words
+let randomValueNumber = Math.floor(Math.random()* randomPropValue.length);
 
-//---Randomizer 
-//function randomWord() = gå igenom lista med ord och ge ut ett random
-//loopa igenom alphabet.length för att kunna matcha 
+//
+let randomValueValue =randomPropValue[randomValueNumber];
 
-//----Generate letters 
-//Create a variable that creates span in html 
-//Create variable that creates text node 
-//Append letter as child to span so they connects 
-//Add class on span (.className) so we can change in css 
-//Append span to the letters container in html 
+// set category info
+document.querySelector(".game-info  span").innerHTML = randomPropName;
 
-var buttons= function( ){
-    myButtons=document.getElementById('buttons');
-    letters=document.createElement('ul');
-    for (var i=0; i<alphabet.length; i++){
-        letters.id='alphabet';
-        ListeningStateChangedEvent.innerHtml=alphabet[i];
-        check();
-        myButtons.appendChild(letters);
-        letters.appendChild(list);
-    }
-}
+//select letters guess element
+let lettersGuessContainer = document. querySelector(".letters-guess");
 
-// create storeguess ul
-result = function () {
-    wordHolder = document.getElementById('hold');
-    correct = document.createElement('ul');
+//convert chosen word to array
+let lettersAndSpace = Array .from(randomValueValue);
 
-    for (var i = 0; i < word.length; i++) {
-      correct.setAttribute('id', 'my-word');
-      guess = document.createElement('li');
-      guess.setAttribute('class', 'guess');
-      if (word[i] === "-") {
-        guess.innerHTML = "-";
-        space = 1;
-      } else {
-        guess.innerHTML = "_";
-      }
-
-      geusses.push(guess);
-      wordHolder.appendChild(correct);
-      correct.appendChild(guess);
-    }
-  }
-   // Animate man
-   var animate = function () {
-    var drawMe = lives ;
-    drawArray[drawMe]();
-  }
+//create spans depaned on word
+lettersAndSpace.forEach(letter=> {
   
-    
+  //create empty span
+  let emptySpan = document.createElement("span");
 
-//----Eventlisteners
-//show lives
-Comment=function(){
-    showlives.innerHTML="you have"+ lives +"lives";
-    if (lives<1){
-        showlives.innerHTML="Game Over";
+  // if letter is space
+  if (letter === '') {
 
-    }
-    for(var i=0;i< storeguess.length;i++){
-        if(counter+space ===geusses.length){
-            showlives.innerHTML="You Win"
-        }
-        
-    }
-      
+    //add class to the span
+    emptySpan.className ='with-space';
+  }
+  // append span to the letters guess container
+  lettersGuessContainer.appendChild(emptySpan);
+
+});
+
+//select guess spans
+let guessSpans =document.querySelectorAll(".letters-guess span");
+
+//swt wrong attempts
+let wrongAttempts=0;
+
+//select the draw element
+let theDraw= document.querySelector (".hangman-draw");
+
+//handle clicking on letters
+document.addEventListener("click" , (e)=>  {
+
   
+  //set the chose status
+  let theStatus= false;
 
-      // Animate man
-      var animate = function () {
-        var drawMe = lives ;
-        drawArray[drawMe]();
+  if (e.target.className === 'letter-box') {
+  e.target.classList.add("clicked");
+  // get Clicked letter
+  let theClickedLetter = e.target.innerHTML.toLowerCase();
+
+  // the chosen word
+  //console.log(lettersAndSpace);
+  let theChosenword= Array.from(randomValueValue.toLowerCase());
+
+  lettersAndSpace.forEach((wordLetter, WordIndex)=>{
+  // if the  clicked letter equal to one of the chosen word letter
+  if(theClickedLetter == wordLetter) {
+
+    //set status to correct
+    theStatus= true;
+  
+    // loop on all guess spans
+    guessSpans .forEach((span, spanIndex)=> {
+
+      if (WordIndex === spanIndex) {
+        span.innerHTML = theClickedLetter;
       }
-    
-      
-       // Hangman
-      canvas =  function(){
-    
-        myStickman = document.getElementById("stickman");
-        context = myStickman.getContext('2d');
-        context.beginPath();
-        context.strokeStyle = "#fff";
-        context.lineWidth = 2;
-      };
-      
-        head = function(){
-          myStickman = document.getElementById("stickman");
-          context = myStickman.getContext('2d');
-          context.beginPath();
-          context.arc(60, 25, 10, 0, Math.PI*2, true);
-          context.stroke();
-        }
-        
-      draw = function($pathFromx, $pathFromy, $pathTox, $pathToy) {
-        
-        context.moveTo($pathFromx, $pathFromy);
-        context.lineTo($pathTox, $pathToy);
-        context.stroke(); 
+    });
+   }
+  });
+// outside loop
+   //if letter is wrong
+   if (theStatus !== true){
+
+
+    //increase the wrong attempts
+    wrongAttempts++;
+
+    //add class wrong on the draw element
+    theDraw.classList.add(`wrong-${wrongAttempts}`);
+
+    //play faiö sound
+    document.getElementById("fail").play();
+    if (wrongAttempts === 8){
+      endGame();
     }
-    
-       frame1 = function() {
-         draw (0, 150, 150, 150);
-       };
-       
-       frame2 = function() {
-         draw (10, 0, 10, 600);
-       };
-      
-       frame3 = function() {
-         draw (0, 5, 70, 5);
-       };
-      
-       frame4 = function() {
-         draw (60, 5, 60, 15);
-       };
-      
-       torso = function() {
-         draw (60, 36, 60, 70);
-       };
-      
-       rightArm = function() {
-         draw (60, 46, 100, 50);
-       };
-      
-       leftArm = function() {
-         draw (60, 46, 20, 50);
-       };
-      
-       rightLeg = function() {
-         draw (60, 70, 100, 100);
-       };
-      
-       leftLeg = function() {
-         draw (60, 70, 20, 100);
-       };
-      
-      drawArray = [rightLeg, leftLeg, rightArm, leftArm,  torso,  head, frame4, frame3, frame2, frame1]; 
-    
-    
-      // OnClick Function
-       check = function () {
-        list.onclick = function () {
-          var geuss = (this.innerHTML);
-          this.setAttribute("class", "active");
-          this.onclick = null;
-          for (var i = 0; i < word.length; i++) {
-            if (word[i] === geuss) {
-              geusses[i].innerHTML = geuss;
-              counter += 1;
-            } 
-          }
-          var j = (word.indexOf(geuss));
-          if (j === -1) {
-            lives -= 1;
-            comments();
-            animate();
-          } else {
-            comments();
-          }
-        }
-      }
-      
-     
-  // Play
-  play = function () {  
-    var words = [
-        "javascript",
-        "monkey",
-        "amazing",
-        "pancake",
-        "galvainze",
-        "cohort",
-        "concatenate",
-        "iteration",
-        "index",
-        "code",
-        "angular",
-        "react",
-        "python"
-        ];
-        
-// Pick a random word
-var word = words[Math.floor(Math.random() * words.length)];
 
-// Set up the amswer answerArrayvar answerArray = [];
-for (var i = 0; i < word.length; i++) {
-  answerArray[i] = "_";
-}
+   }
+   else{ document.getElementById("success").play();}
+} 
 
-var remainingLetters = word.length;
+  });
 
-        geusses = [ ];
-        lives = 10;
-        counter = 0;
-        space = 0;
-        result();
-        comments();
-        selectCat();
-        canvas();
-      }
-    
-      play();
-            
-}
-//En eventlistener för knapptryck på bokstav som går in i funktion x 

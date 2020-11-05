@@ -106,6 +106,8 @@ showLives = () => {
     }  
 }
 
+
+
   
 
 
@@ -396,5 +398,4 @@ wordsList();
 
 
 
-//----Eventlisteners
-//En eventlistener för knapptryck på bokstav som går in i funktion x 
+

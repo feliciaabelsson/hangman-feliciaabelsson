@@ -5,9 +5,11 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <link rel="stylesheet" href="./css/style.css">
-    <title>Document</title>
+   
+    <title>Hangman Game</title>
 </head>
 <body>
+
     <div class="wrapper">
         <!-- <figure>
                 <img src="./hangman.svg" class="hanging-man" alt="hanging man">
@@ -56,7 +58,52 @@
         <p id="right-answer"></p>
         <button id="play-again">play again</button>
     </div>
+
+    <section class="container">
+        <article class="game-info">
+            <div class="game-name"> Hangman </div>
+            
+            <div class="category">
+                Word Form:<span></span>
+            </div>
+        </article>
+        </section>
+       
+        <hr>
+        <section class="row">
+
+            <article class="hangman-draw">
+                <div class="the-draw"> 
+                    <div class="the-stand"></div>
+                    <div class="the-hang"></div>
+                    <div class="the-rope"></div>
+                    
+                        <div class="the-man">
+                        <div class="head"></div>
+                        <div class="body"></div>
+                        <div class="hands"></div>
+                        <div class="legs"></div>
+                    </div>
+                </div>
+            </article>
+
+            <article class="letters"></article>
+        </section>
+        <hr>
+        <div class="letters-guess"></div>
+
+        <h3>Guess the word by picking a letter</h3>
+        <audio id="success" src="audio/success.mp4" preload="auto"></audio>
+        <audio id="fail" src="audio/fail.mp4" preload="auto"></audio>
+
+                    
+
+       
+    </div>
+
+    <script src="./script/script.js"></script>
     
-    <script src="./js/script.js"></script>
+
+    
 </body>
 </html>

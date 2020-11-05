@@ -9,16 +9,53 @@
 </head>
 <body>
     <div class="wrapper">
-        <figure>
-            <img src="./hangman.svg" class="hanging-man" alt="hanging man">
-        </figure>
+        <!-- <figure>
+                <img src="./hangman.svg" class="hanging-man" alt="hanging man">
+            </figure> -->
         <h1>The Hangman Game</h1>
-        <h3>Guess the word by picking a letter</h3>
-        <section id="buttons"></section>
-        <button id="reset">play again</button>
-    </div>
+    <section class="content-wrapper"> 
+        <article class="left-section">
+            
+            <!--Animation-->
+            <section id="animation-container">
+                <article class="hangman-draw">
+                    <div class="the-draw">
+                        <div class="the-stand"></div>
+                        <div class="the-hang"></div>
+                        <div class="the-rope"></div>
+    
+                        <div class="the-man">
+                            <div class="head"></div>
+                            <div class="body"></div>
+                            <div class="hands"></div>
+                            <div class="legs"></div>
+                        </div>
+                    </div>
+                </article>
+            </section>
+            <!--End of animation-->
+            <aside class="mistake-counter-container">
+                <p id="mistake-counter"></p>
+            </aside>
+        </article>
 
-    <!--platshållare för bokstävernas plats-->
+        <article class="right-section">
+            <article class="letter-section">
+                <h3>Guess the word by picking a letter</h3>
+                <p id="category"></p>
+                <section id="buttons"></section>
+                <section id="word-holder"></section>
+            </article>
+        </article>
+    </section>
+        
+        
+        
+        
+        
+        <p id="right-answer"></p>
+        <button id="play-again">play again</button>
+    </div>
     
     <script src="./js/script.js"></script>
 </body>

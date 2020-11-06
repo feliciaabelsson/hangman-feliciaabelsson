@@ -197,3 +197,4 @@ clickedLetter();
 showLives();
 wordsList();
 playAgain();
+

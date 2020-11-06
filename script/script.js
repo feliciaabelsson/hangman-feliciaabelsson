@@ -10,20 +10,13 @@ let counter;
 let word;
 
 let wrongAttempts = 0;
+
 let theDraw= document.querySelector (".hangman-draw");
 
 const alphabet = ['a','b','c','d','e','f','g','h','i','j','k','l','m','n','o','p','q','r','s','t','u','v','w','x','y','z'];
 
-// const categories = [
-//     ['godfather', 'inception', 'matrix', 'seven', 'lionking'],
-//     ['minecraft', 'tetris', 'dota', 'fortnite', 'uno']
-// ];
-//cateogies 
-//have to change so that it does not matter if its uppercase or not
-// const categories = [
-//     ['Godfather', 'Inception', 'Matrix', 'Seven', 'Lionking'],
-//     ['Minecraft', 'Tetris', 'Dota', 'Fortnite', 'Uno']
-// ];
+
+
 
 const categories = {
     movies: ['godfather', 'inception', 'matrix', 'seven', 'lionking'],
@@ -68,7 +61,6 @@ clickedLetter = () => {
         let wrongGuess = (word.indexOf(guessedLetter));
         //if the player clicks on wrong letter (-1 = a letter that does not exist), the lives goes down by one 
         if (wrongGuess === -1) {
-            
             lives -= 1;
             wrongAttempts++;
             //add class wrong on the draw element
@@ -155,32 +147,33 @@ wordsList = () => {
     }
 }
 
-// //Get random word from array
-// randomWord = () => {
-//     //goes through the first step of array categories and puts it in a variable 
-//     choosenCategory = categories[Math.floor(Math.random() * categories.length)];
-//     //goes through the second step of array categories and gets a random string from list 
-//     word = choosenCategory[Math.floor(Math.random() * choosenCategory.length)];
-//     console.log(word);
 
-//     guesses = [];
-//     lives = 10;
-//     counter = 0;
-// }
-
+//function for getting words out of array
 getWords = () => {
+    //getting the keys from the object
     let key = Object.keys(categories);
+    //accessing the keys array lenght and randomizes
     let randomArray = key[Math.floor(Math.random() * key.length)];
+    //sets cateogires as the array of the keys
     let list = categories[randomArray];
+    //gets out the strings from the arrays and randomizes 
     word = list[Math.floor(Math.random() * list.length)];
     console.log(word)
+    //gets the element of html 
     let category = document.getElementById('category');
+    //writes out what category the string belongs to 
     category.innerHTML = 'The category is: ' + randomArray;   
 
-    guesses = [];
-    lives = 10;
+    //sets lives to 9 each new round
+    lives = 9;
+    //sets counter back to 0 each round
     counter = 0;
 }  
+
+//function for erasing each new misstake class to the drawing 
+eraseAnimation = () => {
+    theDraw.classList.remove('wrong-1', 'wrong-2','wrong-3','wrong-4','wrong-5','wrong-6','wrong-7','wrong-8','wrong-9');
+}
 
 
 //play again function 
@@ -189,21 +182,25 @@ document.getElementById('play-again').onclick = playAgain = () => {
     letters.parentNode.removeChild(letters);
     rightWord.innerHTML = '';
     storeGuesses = [];
-    //theDraw.classList.remove(`wrong-${wrongAttempts}`);
-
+    //sets wrong attempts to 0 so it will start counting from scratch 
+    wrongAttempts = 0;
+    //erases the animation
+    eraseAnimation();
     getWords();
-    //randomWord();
     buttons();
    
     showLives();
     wordsList();
+    clickedLetter();
 }
+
 
 buttons();
 getWords();
-//randomWord();
 clickedLetter();
 showLives();
 wordsList();
- 
+
+playAgain();
+
 

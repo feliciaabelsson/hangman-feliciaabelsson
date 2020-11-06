@@ -15,10 +15,13 @@ let theDraw = document.querySelector (".hangman-draw");
 
 const alphabet = ['a','b','c','d','e','f','g','h','i','j','k','l','m','n','o','p','q','r','s','t','u','v','w','x','y','z'];
 
+
+
+
 const categories = {
     movies: ['godfather', 'inception', 'matrix', 'seven', 'lionking'],
     games: ['minecraft', 'tetris', 'dota', 'fortnite', 'uno'],
-    countries:["sweden", "syria","tanzania","niger","jamaica","greece"]
+    countries:["sweden", "syria","tanzania","biger","jamaica","greece"]
 };
 
  
@@ -144,6 +147,7 @@ wordsList = () => {
     }
 }
 
+
 //function for getting words out of array
 getWords = () => {
     //getting the keys from the object
@@ -196,5 +200,7 @@ getWords();
 clickedLetter();
 showLives();
 wordsList();
+
 playAgain();
+
 

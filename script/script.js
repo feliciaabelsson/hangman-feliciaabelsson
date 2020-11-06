@@ -28,7 +28,7 @@ const alphabet = ['a','b','c','d','e','f','g','h','i','j','k','l','m','n','o','p
 const categories = {
     movies: ['godfather', 'inception', 'matrix', 'seven', 'lionking'],
     games: ['minecraft', 'tetris', 'dota', 'fortnite', 'uno'],
-    countries:["Sweden", "Syria","Tanzania","Niger","Jamaica","Greece"]
+    countries:["sweden", "syria","tanzania","biger","jamaica","greece"]
 };
 
  

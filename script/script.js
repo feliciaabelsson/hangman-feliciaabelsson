@@ -10,41 +10,24 @@ let counter;
 let word;
 
 let wrongAttempts = 0;
+
 let theDraw= document.querySelector (".hangman-draw");
 
 const alphabet = ['a','b','c','d','e','f','g','h','i','j','k','l','m','n','o','p','q','r','s','t','u','v','w','x','y','z'];
 
-const categories = [
-    ['godfather', 'inception', 'matrix', 'seven', 'lionking'],
-    ['minecraft', 'tetris', 'dota', 'fortnite', 'uno']
-];
-//cateogies 
-//have to change so that it does not matter if its uppercase or not
-// const categories = [
-//     ['Godfather', 'Inception', 'Matrix', 'Seven', 'Lionking'],
-//     ['Minecraft', 'Tetris', 'Dota', 'Fortnite', 'Uno']
-// ];
-
-const categories2 = {
+const categories = {
     movies: ['godfather', 'inception', 'matrix', 'seven', 'lionking'],
     games: ['minecraft', 'tetris', 'dota', 'fortnite', 'uno'],
-    countries:["Sweden", "Syria","Tanzania","Niger","Jamaica","Greece"]
+    countries:["sweden", "syria","tanzania","niger","jamaica","greece"]
 };
 
  
-
-
-
-
-
 
 //-----Elements 
 let rightWord = document.getElementById('right-answer')
 //getting the element in html where the lives will be showed 
 let pointStatus = document.getElementById("mistake-counter");
 let showClue= document.getElementById("clue");
-
-
 
 
 
@@ -75,7 +58,6 @@ clickedLetter = () => {
         let wrongGuess = (word.indexOf(guessedLetter));
         //if the player clicks on wrong letter (-1 = a letter that does not exist), the lives goes down by one 
         if (wrongGuess === -1) {
-            
             lives -= 1;
             wrongAttempts++;
             //add class wrong on the draw element
@@ -105,9 +87,7 @@ showLives = () => {
         } 
     }  
 }
-
   
-
 
 //function for getting the letters from array and writing them out on a li list in html
 buttons = () => {
@@ -137,9 +117,6 @@ buttons = () => {
 };
 
 
-
-
-
 //function for word holder
 wordsList = () => {
     //gets the html element 
@@ -167,34 +144,32 @@ wordsList = () => {
     }
 }
 
-
-
-// //Get random word from array
-// randomWord = () => {
-//     //goes through the first step of array categories and puts it in a variable 
-//     choosenCategory = categories[Math.floor(Math.random() * categories.length)];
-//     //goes through the second step of array categories and gets a random string from list 
-//     word = choosenCategory[Math.floor(Math.random() * choosenCategory.length)];
-//     console.log(word);
-
-//     guesses = [];
-//     lives = 10;
-//     counter = 0;
-// }
-
+//function for getting words out of array
 getWords = () => {
-    let key = Object.keys(categories2);
+    //getting the keys from the object
+    let key = Object.keys(categories);
+    //accessing the keys array lenght and randomizes
     let randomArray = key[Math.floor(Math.random() * key.length)];
-    let list = categories2[randomArray];
+    //sets cateogires as the array of the keys
+    let list = categories[randomArray];
+    //gets out the strings from the arrays and randomizes 
     word = list[Math.floor(Math.random() * list.length)];
     console.log(word)
+    //gets the element of html 
     let category = document.getElementById('category');
+    //writes out what category the string belongs to 
     category.innerHTML = 'The category is: ' + randomArray;   
 
-    guesses = [];
-    lives = 10;
+    //sets lives to 9 each new round
+    lives = 9;
+    //sets counter back to 0 each round
     counter = 0;
 }  
+
+//function for erasing each new misstake class to the drawing 
+eraseAnimation = () => {
+    theDraw.classList.remove('wrong-1', 'wrong-2','wrong-3','wrong-4','wrong-5','wrong-6','wrong-7','wrong-8','wrong-9');
+}
 
 
 //play again function 
@@ -203,198 +178,22 @@ document.getElementById('play-again').onclick = playAgain = () => {
     letters.parentNode.removeChild(letters);
     rightWord.innerHTML = '';
     storeGuesses = [];
-    //theDraw.classList.remove(`wrong-${wrongAttempts}`);
-
+    //sets wrong attempts to 0 so it will start counting from scratch 
+    wrongAttempts = 0;
+    //erases the animation
+    eraseAnimation();
     getWords();
-    //randomWord();
     buttons();
    
     showLives();
     wordsList();
+    clickedLetter();
 }
+
 
 buttons();
 getWords();
-//randomWord();
 clickedLetter();
 showLives();
 wordsList();
- 
-
-
-// play = function () {
-//      //goes through the first step of array categories and puts it in a variable 
-//      choosenCategory = categories[Math.floor(Math.random() * categories.length)];
-//      //goes through the second step of array categories and gets a random string from list 
-//      word = choosenCategory[Math.floor(Math.random() * choosenCategory.length)];
-//          
-//      buttons();
-//      //stores the words in a new empty array
-//      guesses = [];
-//      lives =10;
-//      counter = 0;
-     
-//      //runs function wordsList 
-//      wordsList();
-//      //getCategory();
-//      showLives();
-     
-// }
-// play();
-
-//function for getting the categories and randomizes the strings of array
-// getCategory = () => {
-//     //goes through the first step of array categories and puts it in a variable 
-//     choosenCategory = categories[Math.floor(Math.random() * categories.length)];
-//     //goes through the second step of array categories and gets a random string from list 
-//     word = choosenCategory[Math.floor(Math.random() * choosenCategory.length)];
-//     console.log(word);    
-//     //stores the words in a new empty array
-//     guesses = [];
-//     //runs function wordsList 
-//     wordsList();
-// } 
-//runs function getCategory
-
-
-
-  
-    //select the draw element
-    
-    //theDraw.classList.add(`wrong-${wrongAttempts}`);
-
-
-
-
-// //function play again 
-// playAgain = () => {
-   
-//     // correct.parentNode.removeChild(correct);
-//     // letters.parentNode.removeChild(letters);
-
-//     livesCounter();
-//     clickedLetter();
-//     buttons();
-//     getCategory();
-  
-// };
-
-
-
-// document.getElementById('play-again').addEventListener('click', playAgain);
- 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-// letterList.addEventListener('click', () => {
-//     console.log('hej');
-// })
-
-
-
-
-//function getting word randomizer
-// randomWord = () => {
-//     //gets words from array and randomize it 
-//     chosenWord = words2[Math.floor(Math.random() * words2.length)];    
-//     //console.log(chosenWord);
-
-//     // for (let i = 0; i < words2.length; i++) {
-//     //     for (let letters in words2) {
-//     //         console.log(letters)
-//     //     }
-//     // }
-
-//     // for (let words in categories) {
-//     //     for (let i = 0; i < words.length; i++) {
-//     //         console.log(words[i])
-//     //         }
-//     //     }
-
-
-    
-
-//     //att få ut arrays ur object 
-//     // let allKeys = Object.keys(categories);
-//     // let randomPropNumber = Math.floor(Math.random() * allKeys.length);
-//     // let randomPropName = allKeys[randomPropNumber];
-//     // let randomPropValue = categories[randomPropName];
-
-//     // let randomValueNumber = Math.floor(Math.random() * randomPropValue.length);
-//     // let randomValueValue = randomPropValue[randomValueNumber];
-//     // console.log(randomPropValue[randomValueNumber]);
-// }
-// //kör randomWord
-// randomWord();
-
-
-//function getting word randomizer
-// randomWord = () => {
-//     let keys = Object.keys(categories);
-//     //loops through length of objects in array
-//     let objectsOfArray = Math.floor(Math.random()* keys.length);
-//     //sets objects of array to its key
-//     let objects = keys[objectsOfArray];
-//     let objectValue = categories[objects];
-
-//     //gets words from array and randomize it 
-//     chosenWord = [Math.floor(Math.random() * objectValue.length)];
-
-    
-//     console.log(chosenWord);
-// }
-// //kör randomWord
-// randomWord();
-
-
-
-
-
-
-//function på vad som händer om en bokstav klickas på 
-//if/else sats vid klick på bokstav 
-//skapa ul lista där bokstäverna som är rätt läggs in i (createElement)
-//i Html ska de tomma bokstäverna för ordet ersättas med bokstäver 
-
-//---Randomizer 
-//function randomWord() = gå igenom lista med ord och ge ut ett random
-//loopa igenom alphabet.length för att kunna matcha 
-
-//----Generate letters 
-//Create a variable that creates span in html 
-//Create variable that creates text node 
-//Append letter as child to span so they connects 
-//Add class on span (.className) so we can change in css 
-//Append span to the letters container in html 
-
-
-
-
-//----Eventlisteners
-//En eventlistener för knapptryck på bokstav som går in i funktion x 
+playAgain();

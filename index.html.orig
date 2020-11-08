@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <link rel="stylesheet" href="./css/style.css">
+
+    <title>Hangman Game</title>
+</head>
+
+<body>
+    <div class="wrapper">
+        <h1>The Hangman Game</h1>
+        <section class="content-wrapper"> 
+            <!--Left section-->
+            <article class="left-section">
+                <!--Animation-->
+                <section id="animation-container">
+                    <article class="hangman-draw">
+                        <div class="the-draw">
+                            <div class="the-stand"></div>
+                            <div class="the-hang"></div>
+                            <div class="the-rope"></div>
+                            <div class="the-man">
+                                <div class="head"></div>
+                                <div class="body"></div>
+                                <div class="hands"></div>
+                                <div class="legs"></div>
+                            </div>
+                        </div>
+                    </article>
+                </section>
+                <!--End of animation-->
+                <aside class="mistake-counter-container">
+                    <p id="mistake-counter"></p>
+                </aside>
+            </article>
+            <!--End of left section-->
+            <!--Right section-->
+            <article class="right-section">
+                <article class="letter-section">
+                    <h3>Guess the word by picking a letter</h3>
+                    <p id="category">The category is: <span></span></p>
+                    <section id="buttons"></section>
+                        <section id="word-holder"></section>  
+                </article>
+                <button id="play-again" class="button-style" >Play Again</button>
+                <p id="right-answer"></p>
+            </article>
+            <!--End of right section-->
+        </section> 
+    </div>
+    <script src="./script/script.js"></script>
+</body>
+</html>

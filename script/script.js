@@ -14,7 +14,6 @@ let wrongAttempts = 0;
 //wins & losses 
 let playerWins = 0;
 let playerLosses = 0;
-let rounds = 0;
 
 
 let theDraw = document.querySelector (".hangman-draw");
@@ -87,11 +86,9 @@ pointsCounter = () => {
     // let totalLosses = document.getElementById('losses');
     if (pointStatus.innerHTML == "You Win!") {
         playerWins += 1;
-        rounds = rounds + 1;
         totalWins.innerHTML = playerWins;
     } else if (lives < 1) {
         playerLosses += 1;
-        rounds = rounds + 1;
         totalLosses.innerHTML = playerLosses;
     }
 }
@@ -120,6 +117,7 @@ showLives = () => {
             console.log(playerWins);
         }  
     }  
+    //runs function pointsCounter
     pointsCounter(); 
 }
   

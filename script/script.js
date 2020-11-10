@@ -1,5 +1,5 @@
 //----Variables
-let choosenCategory;
+
 //how many lives the player have from the beginning 
 let lives = 9;
 //stores the guesses 
@@ -11,17 +11,14 @@ let word;
 
 let wrongAttempts = 0;
 
-let theDraw = document.querySelector (".hangman-draw");
+let theDraw= document.querySelector (".hangman-draw");
 
 const alphabet = ['a','b','c','d','e','f','g','h','i','j','k','l','m','n','o','p','q','r','s','t','u','v','w','x','y','z'];
 
-
-
-
 const categories = {
-    movies: ['godfather', 'inception', 'matrix', 'seven', 'lionking'],
-    games: ['minecraft', 'tetris', 'dota', 'fortnite', 'uno'],
-    countries:["sweden", "syria","tanzania","biger","jamaica","greece"]
+    Movies: ['godfather', 'inception', 'matrix', 'seven', 'lionking'],
+    Games: ['minecraft', 'tetris', 'dota', 'fortnite', 'uno'],
+    Countries:["sweden", "syria","tanzania","niger","jamaica","greece"]
 };
 
  
@@ -30,7 +27,7 @@ const categories = {
 let rightWord = document.getElementById('right-answer')
 //getting the element in html where the lives will be showed 
 let pointStatus = document.getElementById("mistake-counter");
-let showClue= document.getElementById("clue");
+//let showClue= document.getElementById("clue");
 
 
 
@@ -59,8 +56,10 @@ clickedLetter = () => {
         }
         //gets the letter that the player clicked on
         let wrongGuess = (word.indexOf(guessedLetter));
+        
         //if the player clicks on wrong letter (-1 = a letter that does not exist), the lives goes down by one 
         if (wrongGuess === -1) {
+            this.setAttribute('class', 'active wrong-letter');
             lives -= 1;
             wrongAttempts++;
             //add class wrong on the draw element
@@ -78,17 +77,23 @@ clickedLetter = () => {
 showLives = () => {
     //writes out how many lives the player have 
     pointStatus.innerHTML = "You have " + lives + " lives";
+    
     //if lives is less then one the player has lost the game 
     if (lives < 1) {
         pointStatus.innerHTML = "Game Over";
-        rightWord.innerHTML = 'The answer was: ' + word;
+        rightWord.innerHTML = 'The answer is: ' + word;
+        //adds class that removes all letters 
+        letterButtons.classList.add('hide-letters');
+        
     } 
     //loops through array storeguesses
     for (let i = 0; i < storeGuesses.length; i++) {
         if (counter === storeGuesses.length) {
             pointStatus.innerHTML = "You Win!";
-        } 
-    }  
+            //adds class that removes all letters 
+            letterButtons.classList.add('hide-letters');
+        }  
+    }   
 }
   
 
@@ -144,9 +149,9 @@ wordsList = () => {
         wordHolder.appendChild(correct);
         //makes guess variable as child to ul list so 
         correct.appendChild(guess);
+       
     }
 }
-
 
 //function for getting words out of array
 getWords = () => {
@@ -158,11 +163,12 @@ getWords = () => {
     let list = categories[randomArray];
     //gets out the strings from the arrays and randomizes 
     word = list[Math.floor(Math.random() * list.length)];
-    console.log(word)
+    console.log(word);
     //gets the element of html 
-    let category = document.getElementById('category');
+    let category = document.querySelector('#category span');
     //writes out what category the string belongs to 
-    category.innerHTML = 'The category is: ' + randomArray;   
+    category.innerHTML =  randomArray;   
+    
 
     //sets lives to 9 each new round
     lives = 9;
@@ -182,6 +188,8 @@ document.getElementById('play-again').onclick = playAgain = () => {
     letters.parentNode.removeChild(letters);
     rightWord.innerHTML = '';
     storeGuesses = [];
+    //removes the class that removes all letters so that they are visible again
+    letterButtons.classList.remove('hide-letters');
     //sets wrong attempts to 0 so it will start counting from scratch 
     wrongAttempts = 0;
     //erases the animation
@@ -200,7 +208,5 @@ getWords();
 clickedLetter();
 showLives();
 wordsList();
-
 playAgain();
-
 

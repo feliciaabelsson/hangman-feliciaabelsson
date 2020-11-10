@@ -11,6 +11,11 @@ let word;
 //Animation starts at 0 
 let wrongAttempts = 0;
 
+//wins & losses 
+let playerWins = 0;
+let playerLosses = 0;
+
+
 let theDraw = document.querySelector (".hangman-draw");
 
 const alphabet = ['a','b','c','d','e','f','g','h','i','j','k','l','m','n','o','p','q','r','s','t','u','v','w','x','y','z'];
@@ -21,7 +26,7 @@ const alphabet = ['a','b','c','d','e','f','g','h','i','j','k','l','m','n','o','p
 const categories = {
     movies: ['godfather', 'inception', 'matrix', 'seven', 'lionking'],
     games: ['minecraft', 'tetris', 'dota', 'fortnite', 'uno'],
-    countries:["sweden", "syria","tanzania","biger","jamaica","greece"]
+    countries:["sweden", "syria","tanzania","niger","jamaica","greece"]
 };
 
  
@@ -72,6 +77,22 @@ clickedLetter = () => {
     } 
 }
 
+//function losses and wins 
+pointsCounter = () => {
+    //loops through array storeguesses
+    let totalWins = document.querySelector('#wins span');
+    let totalLosses = document.querySelector('#losses span');
+    // let totalWins = document.getElementById('wins');
+    // let totalLosses = document.getElementById('losses');
+    if (pointStatus.innerHTML == "You Win!") {
+        playerWins += 1;
+        totalWins.innerHTML = playerWins;
+    } else if (lives < 1) {
+        playerLosses += 1;
+        totalLosses.innerHTML = playerLosses;
+    }
+}
+
 
 //Show lives 
 //Counts lives and renders how many the player have left when making a wrong move 
@@ -93,9 +114,11 @@ showLives = () => {
             pointStatus.innerHTML = "You Win!";
             //adds class that removes all letters 
             letterButtons.classList.add('hide-letters');
+            console.log(playerWins);
         }  
     }  
-    
+    //runs function pointsCounter
+    pointsCounter(); 
 }
   
   
@@ -166,12 +189,12 @@ getWords = () => {
     let list = categories[randomArray];
     //gets out the strings from the arrays and randomizes 
     word = list[Math.floor(Math.random() * list.length)];
-    console.log(word)
+    console.log(word);
     //gets the element of html 
-    let category = document.getElementById('category');
+    let category = document.querySelector('#category span');
     //writes out what category the string belongs to 
-    category.innerHTML = 'The category is: ' + randomArray;   
-
+    category.innerHTML =  randomArray;   
+    
     //sets lives to 9 each new round
     lives = 9;
     //sets counter back to 0 each round
@@ -211,6 +234,6 @@ clickedLetter();
 showLives();
 wordsList();
 
-playAgain();
+
 
 

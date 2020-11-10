@@ -6,6 +6,13 @@
     font-family: 'Indie Flower', cursive;
     font-family: 'Roboto', sans-serif;
     font-family: 'Syne Mono', monospace; 
+    
+    /*Colors*/
+    --blue: rgb(54, 54, 211);
+    --dark-blue: rgb(27, 27, 102);
+    --grey: rgb(180, 180, 180);
+    --dark-grey: rgb(71, 71, 71); 
+    --red: rgb(201, 0, 0);
 }
 
 body {
@@ -81,7 +88,7 @@ ul {
 }
 
 .button-style {
-    background: rgb(27, 27, 102);
+    background: var(--dark-blue); 
     border: none;
     border-radius: 5px;
     color: white;
@@ -95,7 +102,7 @@ ul {
 }
 
 .button-style:hover {
-    background: rgb(54, 54, 211);
+    background: var(--blue);
     transform: scale(1.1);
 }
 
@@ -120,15 +127,14 @@ ul {
 }
 
 #category span{
-    color:  rgb(54, 54, 211);
+    color: var(--blue);
     font-size: 1.2rem;
 }
-
 
 /*Letters in alphabet*/
 .letter {
     font-size: 1.5rem;
-    background: rgb(54, 54, 211);
+    background: var(--blue);
     min-width: 2rem;
     padding: .5rem;
     border-radius: 10%;
@@ -136,16 +142,16 @@ ul {
 }
 
 .letter:hover {
-    background: rgb(27, 27, 102);
+    background: var(--dark-blue);
 }
 
 .active {
     font-size: 1.5rem;
-    background: rgb(180, 180, 180);
+    background: var(--grey);
     min-width: 2rem;
     padding: .5rem;
     border-radius: 10%;
-    color: rgb(71, 71, 71);   
+    color: var(--dark-grey); 
 }
 
 .hide-letters {
@@ -169,6 +175,17 @@ ul {
     font-weight: 300;
 }
 
+#points-counter {
+    display: flex;
+    gap: 1rem;
+    justify-content: center;
+}
+
+#wins span, #losses span {
+    color: var(--blue);
+    font-weight: 500;
+}
+
 /*Mistake counter*/
 .mistake-counter-container {
     display: flex;
@@ -176,7 +193,7 @@ ul {
 }
 
 #mistake-counter {
-   background: rgb(27, 27, 102);
+   background: var(--dark-blue);
    border-radius: 5px;
    color: white;
    padding: 1rem;
@@ -186,7 +203,7 @@ ul {
 } 
 
 #right-answer {
-    color: rgb(201, 0, 0);
+    color: var(--red);
     top: 50%;
     left: 50%;
     font-size: 1.2rem;  
@@ -241,9 +258,8 @@ ul {
 }
 
 
-
 /*Hangman animations*/
- #animation-container {
+#animation-container {
     min-width: 20rem;
 } 
 

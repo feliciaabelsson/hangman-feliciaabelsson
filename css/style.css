@@ -148,6 +148,10 @@ ul {
     color: rgb(71, 71, 71);   
 }
 
+.hide-letters {
+    display: none !important;
+}
+
 .wrong-letter {
     animation: swing 1s ease;
     animation-iteration-count: 1;

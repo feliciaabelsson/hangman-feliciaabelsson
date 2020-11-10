@@ -1,5 +1,5 @@
 //----Variables
-
+let choosenCategory;
 //how many lives the player have from the beginning 
 let lives = 9;
 //stores the guesses 
@@ -8,17 +8,20 @@ let storeGuesses = [];
 let counter;
 //The word that is given the player 
 let word;
-
+//Animation starts at 0 
 let wrongAttempts = 0;
 
-let theDraw= document.querySelector (".hangman-draw");
+let theDraw = document.querySelector (".hangman-draw");
 
 const alphabet = ['a','b','c','d','e','f','g','h','i','j','k','l','m','n','o','p','q','r','s','t','u','v','w','x','y','z'];
 
+
+
+
 const categories = {
-    Movies: ['godfather', 'inception', 'matrix', 'seven', 'lionking'],
-    Games: ['minecraft', 'tetris', 'dota', 'fortnite', 'uno'],
-    Countries:["sweden", "syria","tanzania","niger","jamaica","greece"]
+    movies: ['godfather', 'inception', 'matrix', 'seven', 'lionking'],
+    games: ['minecraft', 'tetris', 'dota', 'fortnite', 'uno'],
+    countries:["sweden", "syria","tanzania","biger","jamaica","greece"]
 };
 
  
@@ -27,12 +30,10 @@ const categories = {
 let rightWord = document.getElementById('right-answer')
 //getting the element in html where the lives will be showed 
 let pointStatus = document.getElementById("mistake-counter");
-//let showClue= document.getElementById("clue");
+// let showClue= document.getElementById("clue");
 
 
 
-
-//-----Functions
 
 // OnClick Function
 clickedLetter = () => {
@@ -82,7 +83,7 @@ showLives = () => {
     if (lives < 1) {
         pointStatus.innerHTML = "Game Over";
         rightWord.innerHTML = 'The answer is: ' + word;
-        //adds class that removes all letters 
+        //adds classremoves all letters 
         letterButtons.classList.add('hide-letters');
         
     } 
@@ -93,8 +94,10 @@ showLives = () => {
             //adds class that removes all letters 
             letterButtons.classList.add('hide-letters');
         }  
-    }   
+    }  
+    
 }
+  
   
 
 //function for getting the letters from array and writing them out on a li list in html
@@ -149,9 +152,9 @@ wordsList = () => {
         wordHolder.appendChild(correct);
         //makes guess variable as child to ul list so 
         correct.appendChild(guess);
-       
     }
 }
+
 
 //function for getting words out of array
 getWords = () => {
@@ -163,12 +166,11 @@ getWords = () => {
     let list = categories[randomArray];
     //gets out the strings from the arrays and randomizes 
     word = list[Math.floor(Math.random() * list.length)];
-    console.log(word);
+    console.log(word)
     //gets the element of html 
-    let category = document.querySelector('#category span');
+    let category = document.getElementById('category');
     //writes out what category the string belongs to 
-    category.innerHTML =  randomArray;   
-    
+    category.innerHTML = 'The category is: ' + randomArray;   
 
     //sets lives to 9 each new round
     lives = 9;
@@ -208,5 +210,7 @@ getWords();
 clickedLetter();
 showLives();
 wordsList();
+
 playAgain();
+
 

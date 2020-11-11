@@ -6,7 +6,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <link rel="stylesheet" href="./css/style.css">
-    <link rel="icon" href="data:;base64,iVBORw0KGgo=">
+
     <title>Hangman Game</title>
 </head>
 
@@ -16,10 +16,6 @@
         <section class="content-wrapper"> 
             <!--Left section-->
             <article class="left-section">
-                <section id="points-counter">
-                    <p id="wins">Total wins: <span>0</span></p>
-                    <p id="losses">Total losses: <span>0</span></p>
-                </section>
                 <!--Animation-->
                 <section id="animation-container">
                     <article class="hangman-draw">
@@ -52,16 +48,10 @@
                 </article>
                 <button id="play-again" class="button-style" >Play Again</button>
                 <p id="right-answer"></p>
-                <p id="countDown"></p>
             </article>
             <!--End of right section-->
         </section> 
     </div>
-    <audio id="failLetter" src="audio/failLetter.mp4.wav" preload="auto"></audio>
-    <audio id="fail" src="audio/fail.wav" preload="auto"></audio>
-    <audio id="letterSound" src="audio/letter.wav" preload="auto"></audio>
-    <audio id="winSound" src="audio/winSound.wav" preload="auto"></audio>
-
     <script src="./script/script.js"></script>
 </body>
 </html>

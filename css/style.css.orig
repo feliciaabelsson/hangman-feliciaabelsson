@@ -6,13 +6,6 @@
     font-family: 'Indie Flower', cursive;
     font-family: 'Roboto', sans-serif;
     font-family: 'Syne Mono', monospace; 
-    
-    /*Colors*/
-    --blue: rgb(54, 54, 211);
-    --dark-blue: rgb(27, 27, 102);
-    --grey: rgb(180, 180, 180);
-    --dark-grey: rgb(71, 71, 71); 
-    --red: rgb(201, 0, 0);
 }
 
 body {
@@ -88,7 +81,7 @@ ul {
 }
 
 .button-style {
-    background: var(--dark-blue); 
+    background: rgb(27, 27, 102);
     border: none;
     border-radius: 5px;
     color: white;
@@ -102,7 +95,7 @@ ul {
 }
 
 .button-style:hover {
-    background: var(--blue);
+    background: rgb(54, 54, 211);
     transform: scale(1.1);
 }
 
@@ -127,14 +120,15 @@ ul {
 }
 
 #category span{
-    color: var(--blue);
+    color:  rgb(54, 54, 211);
     font-size: 1.2rem;
 }
+
 
 /*Letters in alphabet*/
 .letter {
     font-size: 1.5rem;
-    background: var(--blue);
+    background: rgb(54, 54, 211);
     min-width: 2rem;
     padding: .5rem;
     border-radius: 10%;
@@ -142,20 +136,16 @@ ul {
 }
 
 .letter:hover {
-    background: var(--dark-blue);
+    background: rgb(27, 27, 102);
 }
 
 .active {
     font-size: 1.5rem;
-    background: var(--grey);
+    background: rgb(180, 180, 180);
     min-width: 2rem;
     padding: .5rem;
     border-radius: 10%;
-    color: var(--dark-grey); 
-}
-
-.hide-letters {
-    display: none !important;
+    color: rgb(71, 71, 71);   
 }
 
 .wrong-letter {
@@ -175,17 +165,6 @@ ul {
     font-weight: 300;
 }
 
-#points-counter {
-    display: flex;
-    gap: 1rem;
-    justify-content: center;
-}
-
-#wins span, #losses span {
-    color: var(--blue);
-    font-weight: 500;
-}
-
 /*Mistake counter*/
 .mistake-counter-container {
     display: flex;
@@ -193,7 +172,7 @@ ul {
 }
 
 #mistake-counter {
-   background: var(--dark-blue);
+   background: rgb(27, 27, 102);
    border-radius: 5px;
    color: white;
    padding: 1rem;
@@ -203,17 +182,11 @@ ul {
 } 
 
 #right-answer {
-    color: var(--red);
+    color: rgb(201, 0, 0);
     top: 50%;
     left: 50%;
     font-size: 1.2rem;  
     font-weight: 400;
-}
-
-p#countDown {
-    text-align: center;
-    font-size: 2rem;
-    margin-top: 0px;
 }
 
 /*Media query for smaller screens*/
@@ -264,8 +237,9 @@ p#countDown {
 }
 
 
+
 /*Hangman animations*/
-#animation-container {
+ #animation-container {
     min-width: 20rem;
 } 
 

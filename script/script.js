@@ -1,55 +1,47 @@
 //----Variables
-let choosenCategory;
-//how many lives the player have from the beginning 
+
+//How many lives the player have from start 
 let lives = 9;
-//stores the guesses 
+//Stores the guesses 
 let storeGuesses = [];
-// Count correct geusses
+//Counts correct geusses
 let counter;
 //The word that is given the player 
 let word;
 //Animation starts at 0 
 let wrongAttempts = 0;
-
-//wins & losses 
+//Wins & losses 
 let playerWins = 0;
 let playerLosses = 0;
-
+//Sets seconds to 0
 let seconds = 0;
 
-let theDraw = document.querySelector (".hangman-draw");
-
 const alphabet = ['a','b','c','d','e','f','g','h','i','j','k','l','m','n','o','p','q','r','s','t','u','v','w','x','y','z'];
-
-
-
 
 const categories = {
     movies: ['godfather', 'inception', 'matrix', 'seven', 'lionking'],
     games: ['minecraft', 'tetris', 'dota', 'fortnite', 'uno'],
     countries:["sweden", "syria","tanzania","niger","jamaica","greece"]
 };
-
  
 
 //-----Elements 
+
 let rightWord = document.getElementById('right-answer')
-//getting the element in html where the lives will be showed 
 let pointStatus = document.getElementById("mistake-counter");
-// let showClue= document.getElementById("clue");
-let totalLosses = document.querySelector('#losses span');
+let theDraw = document.querySelector (".hangman-draw");
 let countDiv = document.getElementById('countDown');
+let totalWins = document.querySelector('#wins span');
+let totalLosses = document.querySelector('#losses span');
 
 
+//--------Functions 
 
-
-
-// OnClick Function
+//OnClick Function
 clickedLetter = () => {
     //when clicked on a letter button it goes to this function 
     letterList.onclick = function () {
-        //sets varaibel guess to 
-        //this binds to the element that caused the event to fire (in this case the letterList)
+        //"this" binds to the element that caused the event to fire (in this case the letterList)
         let guessedLetter = (this.innerHTML);
         //sets class active to the elements 
         this.setAttribute("class", "active");
@@ -60,18 +52,21 @@ clickedLetter = () => {
                 //adds the clicked letter to the innerhtml of storeguess 
                 storeGuesses[i].innerHTML = guessedLetter;
                 //counts up by one 
-                counter++;
+                counter++;   
+                //adds sound
                 document.getElementById("letterSound").play();
             }
         }
+
         //gets the letter that the player clicked on
         let wrongGuess = (word.indexOf(guessedLetter));
-        
         //if the player clicks on wrong letter (-1 = a letter that does not exist), the lives goes down by one 
         if (wrongGuess === -1) {
             this.setAttribute('class', 'active wrong-letter');
             lives -= 1;
+            //adds wrongAttempts by 1 each wrong attempt  
             wrongAttempts++;
+            //adds sound
             document.getElementById("failLetter").play();
             //add class wrong on the draw element
             theDraw.classList.add(`wrong-${wrongAttempts}`);
@@ -80,9 +75,7 @@ clickedLetter = () => {
             showLives();
         }
     } 
-}
-
-
+};
 
 
 //Function for timer
@@ -102,38 +95,41 @@ seconedPass = () => {
         seconds += 1;
     }
     else {
+        //clears interval 
         clearInterval(countDown);
+        //plays sound
         document.getElementById("fail").play();
+        //adds text 
         pointStatus.innerHTML = "Game Over";
+        //hides letters
         letterButtons.classList.add('hide-letters');
+        //adds playerLosses count by 1
         playerLosses += 1;
+        //shows total losses
         totalLosses.innerHTML = playerLosses;
     }
 };
 
- 
 
-
-
-
-//function losses and wins 
+//Function losses and wins counter 
 pointsCounter = () => {
-    //loops through array storeguesses
-    let totalWins = document.querySelector('#wins span');
-    
-    // let totalWins = document.getElementById('wins');
-    // let totalLosses = document.getElementById('losses');
+    //if pointsStatus is "you win" 
     if (pointStatus.innerHTML == "You Win!") {
+        //playerWins gets added by 1 
         playerWins += 1;
+        //writes out the points in innerhtml
         totalWins.innerHTML = playerWins;
+        //if lives is less then one 
     } else if (lives < 1) {
+        //playerLosses gets added by 1
         playerLosses += 1;
+        //writes out the points in innerhtml
         totalLosses.innerHTML = playerLosses;
-    } 
-}
+    }
+};
 
 
-//Show lives 
+//Function Show lives 
 //Counts lives and renders how many the player have left when making a wrong move 
 showLives = () => {
     //writes out how many lives the player have 
@@ -141,34 +137,35 @@ showLives = () => {
     
     //if lives is less then one the player has lost the game 
     if (lives < 1) {
-           
-    //play fail sound
+        //plays sound
         document.getElementById("fail").play();
         pointStatus.innerHTML = "Game Over";
         rightWord.innerHTML = 'The answer is: ' + word;
-        //adds classremoves all letters 
+        //adds class that removes all letters 
         letterButtons.classList.add('hide-letters');
+        //clears interval 
         clearInterval(countDown);
-        
     } 
     //loops through array storeguesses
     for (let i = 0; i < storeGuesses.length; i++) {
+        //if the counter is equal to the storeguess array
         if (counter === storeGuesses.length) {
             pointStatus.innerHTML = "You Win!";
+            //plays sound
             document.getElementById("winSound").play();
             //adds class that removes all letters 
             letterButtons.classList.add('hide-letters');
+            //clears interval 
             clearInterval(countDown);
-            console.log(playerWins);
         }  
     }  
     //runs function pointsCounter
     pointsCounter(); 
-}
+};
   
   
-
-//function for getting the letters from array and writing them out on a li list in html
+//Function Buttons
+//gets the letters from array and writes them on a li list in html
 buttons = () => {
     //getting the button from html
     letterButtons = document.getElementById('buttons');
@@ -191,13 +188,12 @@ buttons = () => {
         letterButtons.appendChild(letters);
         //sets li list as child to ul 
         letters.appendChild(letterList);
-        //console.log(letterList)
     }
     
 };
 
 
-//function for word holder
+//Function for word holders
 wordsList = () => {
     //gets the html element 
     wordHolder = document.getElementById('word-holder');
@@ -222,10 +218,10 @@ wordsList = () => {
         //makes guess variable as child to ul list so 
         correct.appendChild(guess);
     }
-}
+};
 
 
-//function for getting words out of array
+//Function for getting words out of array
 getWords = () => {
     //getting the keys from the object
     let key = Object.keys(categories);
@@ -247,20 +243,26 @@ getWords = () => {
     counter = 0;
 }  
 
-//function for erasing each new misstake class to the drawing 
+//Function for erasing each new misstake class to the drawing 
 eraseAnimation = () => {
     theDraw.classList.remove('wrong-1', 'wrong-2','wrong-3','wrong-4','wrong-5','wrong-6','wrong-7','wrong-8','wrong-9');
 }
 
 
-
-//play again function 
+//Function for Play Again button
+//When clicking on play-again button this functions runs
 document.getElementById('play-again').onclick = playAgain = () => {
+    //removes all ul element from wordHoler()
     correct.parentNode.removeChild(correct);
+    //removes all ul element from buttons()
     letters.parentNode.removeChild(letters);
+    //sets rightword back to nothing 
     rightWord.innerHTML = '';
+    //makes storeGuesses to an empty array again
     storeGuesses = [];
+    //sets seconds back to 0
     seconds = 0;
+    //runs interval again 
     countDown = setInterval(function () {
         "use strict";
         seconedPass();
@@ -269,7 +271,8 @@ document.getElementById('play-again').onclick = playAgain = () => {
     letterButtons.classList.remove('hide-letters');
     //sets wrong attempts to 0 so it will start counting from scratch 
     wrongAttempts = 0;
-    //erases the animation
+   
+    //runs each function again 
     eraseAnimation();
     getWords();
     buttons();
@@ -277,7 +280,6 @@ document.getElementById('play-again').onclick = playAgain = () => {
     wordsList();
     clickedLetter(); 
 }
-
 
 
 buttons();

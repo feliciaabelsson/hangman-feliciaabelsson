@@ -15,6 +15,7 @@ let wrongAttempts = 0;
 let playerWins = 0;
 let playerLosses = 0;
 
+let seconds = 0;
 
 let theDraw = document.querySelector (".hangman-draw");
 
@@ -36,6 +37,9 @@ let rightWord = document.getElementById('right-answer')
 //getting the element in html where the lives will be showed 
 let pointStatus = document.getElementById("mistake-counter");
 // let showClue= document.getElementById("clue");
+let totalLosses = document.querySelector('#losses span');
+let countDiv = document.getElementById('countDown');
+
 
 
 
@@ -58,7 +62,6 @@ clickedLetter = () => {
                 //counts up by one 
                 counter++;
                 document.getElementById("letterSound").play();
-                
             }
         }
         //gets the letter that the player clicked on
@@ -79,11 +82,45 @@ clickedLetter = () => {
     } 
 }
 
+
+
+
+//Function for timer
+//sets interval 
+countDown = setInterval(function () {
+    "use strict";
+    seconedPass();
+}, 1000);
+
+//function for seconds passing 
+seconedPass = () => {
+    "use strict";
+    countDiv.innerHTML = "Time:" + seconds + "s";
+    //if seconds is less then 5
+    if (seconds < 40) {
+        //add 1 second 
+        seconds += 1;
+    }
+    else {
+        clearInterval(countDown);
+        document.getElementById("fail").play();
+        pointStatus.innerHTML = "Game Over";
+        letterButtons.classList.add('hide-letters');
+        playerLosses += 1;
+        totalLosses.innerHTML = playerLosses;
+    }
+};
+
+ 
+
+
+
+
 //function losses and wins 
 pointsCounter = () => {
     //loops through array storeguesses
     let totalWins = document.querySelector('#wins span');
-    let totalLosses = document.querySelector('#losses span');
+    
     // let totalWins = document.getElementById('wins');
     // let totalLosses = document.getElementById('losses');
     if (pointStatus.innerHTML == "You Win!") {
@@ -92,7 +129,7 @@ pointsCounter = () => {
     } else if (lives < 1) {
         playerLosses += 1;
         totalLosses.innerHTML = playerLosses;
-    }
+    } 
 }
 
 
@@ -111,6 +148,7 @@ showLives = () => {
         rightWord.innerHTML = 'The answer is: ' + word;
         //adds classremoves all letters 
         letterButtons.classList.add('hide-letters');
+        clearInterval(countDown);
         
     } 
     //loops through array storeguesses
@@ -120,6 +158,7 @@ showLives = () => {
             document.getElementById("winSound").play();
             //adds class that removes all letters 
             letterButtons.classList.add('hide-letters');
+            clearInterval(countDown);
             console.log(playerWins);
         }  
     }  
@@ -154,6 +193,7 @@ buttons = () => {
         letters.appendChild(letterList);
         //console.log(letterList)
     }
+    
 };
 
 
@@ -213,12 +253,18 @@ eraseAnimation = () => {
 }
 
 
+
 //play again function 
 document.getElementById('play-again').onclick = playAgain = () => {
     correct.parentNode.removeChild(correct);
     letters.parentNode.removeChild(letters);
     rightWord.innerHTML = '';
     storeGuesses = [];
+    seconds = 0;
+    countDown = setInterval(function () {
+        "use strict";
+        seconedPass();
+    }, 1000);
     //removes the class that removes all letters so that they are visible again
     letterButtons.classList.remove('hide-letters');
     //sets wrong attempts to 0 so it will start counting from scratch 
@@ -227,11 +273,11 @@ document.getElementById('play-again').onclick = playAgain = () => {
     eraseAnimation();
     getWords();
     buttons();
-   
     showLives();
     wordsList();
-    clickedLetter();
+    clickedLetter(); 
 }
+
 
 
 buttons();

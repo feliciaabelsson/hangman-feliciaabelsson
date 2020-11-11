@@ -57,6 +57,7 @@ clickedLetter = () => {
                 storeGuesses[i].innerHTML = guessedLetter;
                 //counts up by one 
                 counter++;
+                document.getElementById("letterSound").play();
                 
             }
         }
@@ -68,6 +69,7 @@ clickedLetter = () => {
             this.setAttribute('class', 'active wrong-letter');
             lives -= 1;
             wrongAttempts++;
+            document.getElementById("failLetter").play();
             //add class wrong on the draw element
             theDraw.classList.add(`wrong-${wrongAttempts}`);
             showLives();
@@ -102,6 +104,9 @@ showLives = () => {
     
     //if lives is less then one the player has lost the game 
     if (lives < 1) {
+           
+    //play fail sound
+        document.getElementById("fail").play();
         pointStatus.innerHTML = "Game Over";
         rightWord.innerHTML = 'The answer is: ' + word;
         //adds classremoves all letters 
@@ -112,6 +117,7 @@ showLives = () => {
     for (let i = 0; i < storeGuesses.length; i++) {
         if (counter === storeGuesses.length) {
             pointStatus.innerHTML = "You Win!";
+            document.getElementById("winSound").play();
             //adds class that removes all letters 
             letterButtons.classList.add('hide-letters');
             console.log(playerWins);

@@ -13,6 +13,8 @@ let wrongAttempts = 0;
 //Wins & losses 
 let playerWins = 0;
 let playerLosses = 0;
+//Sets seconds to 0
+let seconds = 0;
 
 const alphabet = ['a','b','c','d','e','f','g','h','i','j','k','l','m','n','o','p','q','r','s','t','u','v','w','x','y','z'];
 
@@ -28,6 +30,9 @@ const categories = {
 let rightWord = document.getElementById('right-answer')
 let pointStatus = document.getElementById("mistake-counter");
 let theDraw = document.querySelector (".hangman-draw");
+let countDiv = document.getElementById('countDown');
+let totalWins = document.querySelector('#wins span');
+let totalLosses = document.querySelector('#losses span');
 
 
 //--------Functions 
@@ -48,6 +53,8 @@ clickedLetter = () => {
                 storeGuesses[i].innerHTML = guessedLetter;
                 //counts up by one 
                 counter++;   
+                //adds sound
+                document.getElementById("letterSound").play();
             }
         }
 
@@ -59,6 +66,8 @@ clickedLetter = () => {
             lives -= 1;
             //adds wrongAttempts by 1 each wrong attempt  
             wrongAttempts++;
+            //adds sound
+            document.getElementById("failLetter").play();
             //add class wrong on the draw element
             theDraw.classList.add(`wrong-${wrongAttempts}`);
             showLives();
@@ -68,10 +77,42 @@ clickedLetter = () => {
     } 
 };
 
+
+//Function for timer
+//sets interval 
+countDown = setInterval(function () {
+    "use strict";
+    seconedPass();
+}, 1000);
+
+//function for seconds passing 
+seconedPass = () => {
+    "use strict";
+    countDiv.innerHTML = "Time:" + seconds + "s";
+    //if seconds is less then 5
+    if (seconds < 40) {
+        //add 1 second 
+        seconds += 1;
+    }
+    else {
+        //clears interval 
+        clearInterval(countDown);
+        //plays sound
+        document.getElementById("fail").play();
+        //adds text 
+        pointStatus.innerHTML = "Game Over";
+        //hides letters
+        letterButtons.classList.add('hide-letters');
+        //adds playerLosses count by 1
+        playerLosses += 1;
+        //shows total losses
+        totalLosses.innerHTML = playerLosses;
+    }
+};
+
+
 //Function losses and wins counter 
 pointsCounter = () => {
-    let totalWins = document.querySelector('#wins span');
-    let totalLosses = document.querySelector('#losses span');
     //if pointsStatus is "you win" 
     if (pointStatus.innerHTML == "You Win!") {
         //playerWins gets added by 1 
@@ -96,18 +137,26 @@ showLives = () => {
     
     //if lives is less then one the player has lost the game 
     if (lives < 1) {
+        //plays sound
+        document.getElementById("fail").play();
         pointStatus.innerHTML = "Game Over";
         rightWord.innerHTML = 'The answer is: ' + word;
         //adds class that removes all letters 
         letterButtons.classList.add('hide-letters');
+        //clears interval 
+        clearInterval(countDown);
     } 
     //loops through array storeguesses
     for (let i = 0; i < storeGuesses.length; i++) {
         //if the counter is equal to the storeguess array
         if (counter === storeGuesses.length) {
             pointStatus.innerHTML = "You Win!";
+            //plays sound
+            document.getElementById("winSound").play();
             //adds class that removes all letters 
             letterButtons.classList.add('hide-letters');
+            //clears interval 
+            clearInterval(countDown);
         }  
     }  
     //runs function pointsCounter
@@ -210,12 +259,18 @@ document.getElementById('play-again').onclick = playAgain = () => {
     rightWord.innerHTML = '';
     //makes storeGuesses to an empty array again
     storeGuesses = [];
+    //sets seconds back to 0
+    seconds = 0;
+    //runs interval again 
+    countDown = setInterval(function () {
+        "use strict";
+        seconedPass();
+    }, 1000);
     //removes the class that removes all letters so that they are visible again
     letterButtons.classList.remove('hide-letters');
     //sets wrong attempts to 0 so it will start counting from scratch 
     wrongAttempts = 0;
-    //erases the animation
-
+   
     //runs each function again 
     eraseAnimation();
     getWords();
